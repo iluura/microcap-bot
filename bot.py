@@ -41,7 +41,7 @@ async def on_ready():
             embed.set_footer(text="Micro-Cap Momentum Scanner • Educational Only")
             
             # 🔔 Pings you directly (Make sure to replace YOUR_USER_ID with your numbers)
-            ping_message = "<@YOUR_USER_ID> New micro-cap catalyst detected!"
+            ping_message = "<@539685617966120990> New micro-cap catalyst detected!"
             
             # Send the text mention alongside the embed block
             await channel.send(content=ping_message, embed=embed)
