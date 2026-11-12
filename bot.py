@@ -46,10 +46,16 @@ async def on_ready():
     await bot.close()
 
 async def fetch_market_catalysts():
-    """
-    Placeholder/Implementation logic linking to SEC RSS/JSON feeds and market data providers.
-    """
-    simulated_findings = []
+    simulated_findings = [
+        {
+            'ticker': 'TEST',
+            'company': 'Test Corporation',
+            'type': 'Test Catalyst / Delisting Warning',
+            'price': 0.45,
+            'float': '1.2M',
+            'details': 'This is a test alert to verify GitHub Actions webhook integration.'
+        }
+    ]
     return simulated_findings
 
 @bot.command(name='scan')
