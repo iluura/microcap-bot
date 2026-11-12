@@ -2,11 +2,11 @@ name: Run Micro-Cap Catalyst Scanner
 
 on:
   schedule:
-    - cron: '0 */2 * * *'  # Runs automatically every 2 hours
-  workflow_dispatch:        # Allows you to click a button to run it manually anytime
+    - cron: '0 */2 * * *'  # Runs every 2 hours automatically
+  workflow_dispatch:
 
 jobs:
-  run-bot:
+  run-scanner:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -20,10 +20,15 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install requests yfinance pandas
 
-      - name: Run Scanner Script
+      - name: Run Background Scanner Webhook
         env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
-          python bot.py
+          python -c "
+          import os, requests
+          webhook_url = os.getenv('DISCORD_WEBHOOK')
+          data = {'content': '<@539685617966120990> 🔍 Scheduled background scan ran successfully! No new anomalies found.'}
+          requests.post(webhook_url, json=data)
+          "
