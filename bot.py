@@ -40,22 +40,22 @@ async def on_ready():
             embed.add_field(name="Details / Filing Summary", value=alert['details'], inline=False)
             embed.set_footer(text="Micro-Cap Momentum Scanner • Educational Only")
             
-            await channel.send(embed=embed)
+            # 🔔 Pings you directly (Make sure to replace YOUR_USER_ID with your numbers)
+            ping_message = "<@YOUR_USER_ID> New micro-cap catalyst detected!"
+            
+            # Send the text mention alongside the embed block
+            await channel.send(content=ping_message, embed=embed)
             
     # Close the bot connection so GitHub Actions finishes the job cleanly and shuts down
     await bot.close()
 
 async def fetch_market_catalysts():
-    simulated_findings = [
-        {
-            'ticker': 'TEST',
-            'company': 'Test Corporation',
-            'type': 'Test Catalyst / Delisting Warning',
-            'price': 0.45,
-            'float': '1.2M',
-            'details': 'This is a test alert to verify GitHub Actions webhook integration.'
-        }
-    ]
+    """
+    Placeholder/Implementation logic linking to SEC RSS/JSON feeds and market data providers.
+    In a live deployment, query the SEC submissions API or a market data provider 
+    filtering for market cap < $20M, price < $1.00, and float < 5M.
+    """
+    simulated_findings = []
     return simulated_findings
 
 @bot.command(name='scan')
